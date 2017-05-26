@@ -6,8 +6,6 @@
         <title>Wreche</title>
         <meta name="description" content="Black metal from the city of shattered dreams.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <meta property="og:title" content="Wreche" />
         <meta property="og:type" content="musician" />
         <meta property="og:url" content="http://wreche.com" />
@@ -33,12 +31,14 @@
             <!--First Slide-->
             <div class="swiper-slide first">
               <div class="image-container">
-                <img src="img/first.jpg" />
+                <img class="grayscale active" src="img/first.jpg" />
+                <img class="color" src="img/second.jpg" />
               </div>
             </div>
             <div class="swiper-slide first">
               <div class="image-container">
-                <img src="img/second.jpg" />
+                <img class="grayscale active" src="img/second.jpg" />
+                <img class="color" src="img/first.jpg" />
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@
                     </div>
                     <span class="player-track"></span>
                 </div>
-                <audio preload class="player-audio-node" controls="controls">Your browser does not support HTML5 Audio!</audio>
+                <audio preload class="player-audio-node" controlsList="nodownload" controls="controls">Your browser does not support HTML5 Audio!</audio>
             </div>
         </div>
 
