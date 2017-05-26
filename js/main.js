@@ -12,7 +12,6 @@ $(function(){
     a11y: true,
     effect: 'fade',
     onKeyPress: function onKeyPress(e) {
-      alert('cool');
       e.which === 32
         ? playing
           ? audio.pause()
@@ -61,6 +60,7 @@ $(function(){
         ];
 
         var handlePause = function handlePause (e) {
+          switchImage('pause');
           return playing = false;
         };
 
@@ -78,7 +78,18 @@ $(function(){
           }
         };
 
+        var switchImage = function switchImage (status) {
+          if (status === 'play') {
+            $('.swiper-slide-active .grayscale').removeClass('active');
+            $('.swiper-slide-active .color').addClass('active');
+          } else {
+            $('.swiper-slide-active .color').removeClass('active');
+            $('.swiper-slide-active .grayscale').addClass('active');
+          }
+        }
+
         var handlePlay = function handlePlay () {
+          switchImage('play');
           $('.player-container').addClass('player-container--active');
           return playing = true;
         };
