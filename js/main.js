@@ -8,7 +8,7 @@ $(function(){
     //Your options here:
     mode:'horizontal',
     loop: true,
-    keyboardControl: true,
+    keyboardControl: false,
     a11y: true,
     effect: 'fade',
     onKeyPress: function onKeyPress(e) {
