@@ -7,13 +7,12 @@ $(function(){
   var mySwiper = $('.swiper-container').swiper({
     //Your options here:
     mode:'horizontal',
-    loop: true,
     keyboardControl: false,
     a11y: true,
     effect: 'fade',
     onKeyPress: function onKeyPress(e) {
       e.which === 32
-        ? playing
+        ? !state.paused
           ? audio.pause()
           : audio.play()
         : false
@@ -23,9 +22,12 @@ $(function(){
     var supportsAudio = !!document.createElement('audio').canPlayType;
     if (supportsAudio) {
         var index = 0;
-        var playing = false;
         var mediaPath = 'https://wreche.s3.amazonaws.com/';
         var extension = '';
+        var state = {
+          paused: true,
+          seeking: false
+        }
         var tracks = [
           {
             "track": 1,
@@ -56,12 +58,25 @@ $(function(){
             "name": "Vessel",
             "length": "8:22",
             "file": "5_wreche_vessel",
+          },
+          {
+            "track": 6,
+            "name": "Credits",
+            "length": null,
+            "file": null,
           }
         ];
 
-        var handlePause = function handlePause (e) {
-          switchImage('pause');
-          return playing = false;
+        var doHandlePause = function doHandlePause (e) {
+          console.log('pausing');
+
+          if (!state.seeking) {
+            switchImage('pause');
+          } else {
+            state.seeking = false;
+          }
+
+          return state.paused = true;
         };
 
         var handleTrackEnd = function handleTrackEnd (e) {
@@ -91,12 +106,25 @@ $(function(){
         var handlePlay = function handlePlay () {
           switchImage('play');
           $('.player-container').addClass('player-container--active');
-          return playing = true;
+          return state.paused = false;
         };
+
+
+        var handleSeeking = function (e) {
+          console.log('seeking');
+          return state.seeking = true;
+        }
+
+        var handlePause = function (e) {
+          return setTimeout(function (e) {
+            doHandlePause(e)
+          }, 10);
+        }
 
         var audio = document.querySelector('.player-audio-node');
         audio.addEventListener('play', handlePlay)
-        audio.addEventListener('pause', handlePause)
+        audio.addEventListener('pause', handlePause);
+        audio.addEventListener('seeking', handleSeeking);
         audio.addEventListener('ended', handleTrackEnd);
 
         var extension = audio.canPlayType('audio/mpeg') ? '.mp3' : audio.canPlayType('audio/ogg') ? '.ogg' : '';
@@ -116,28 +144,25 @@ $(function(){
         var trackName = $('.player-track');
 
         var handleBtnPrevClick = function handleBtnPrevClick () {
-            if ((index - 1) > -1) {
-                mySwiper.slidePrev();
-                index--;
-                loadTrack(index);
-                if (playing) {
-                    audio.play();
-                }
-            } else {
+            var isFirst = index === 0;
+            if (isFirst) {
                 audio.pause();
-                index = 0;
-                mySwiper.slideTo(0);
-                loadTrack(index);
+                index = trackCount - 1;
+                mySwiper.slideTo(index);
+            } else {
+              mySwiper.slidePrev();
+              index--;
             }
+            loadTrack(index);
         }
 
         var handleBtnNextClick = function handleBtnNextClick () {
-            if ((index + 1) < trackCount) {
+            if (index < trackCount - 1) {
                 index++;
                 mySwiper.slideNext();
                 loadTrack(index);
-                if (playing) {
-                    audio.play();
+                if (!state.paused) {
+                  audio.pause();
                 }
             } else {
                 audio.pause();

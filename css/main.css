@@ -20,7 +20,6 @@ html {
   color:#C8C7C8;
   font:20px/24px "Yanone Kaffeesatz", HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight:300;
-  padding:5px 0;
 }
 
 
@@ -113,6 +112,7 @@ textarea {
 
 body {
   font-family: 'Yanone Kaffeesatz';
+  margin: 0;
   overflow: hidden;
 }
 
@@ -121,9 +121,78 @@ img {
   max-width: 100%;
 }
 
+.preload {
+   position: absolute;
+   overflow: hidden;
+   left: -9999px;
+   top: -9999px;
+   height: 1px;
+   width: 1px;
+}
+
 .swiper-slide {
-  width: 100%;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
+}
+
+.swiper-slide.first .grayscale {
+  background: url('../img/PRUNING_THE_SPIRIT_1_WEB_16x9.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.swiper-slide.second .grayscale {
+  background: url('../img/ANGEL_CITY_1_WEB_16x9.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.swiper-slide.third .grayscale {
+  background: url('../img/FATA_MORGANA_1_WEB_16x19.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.swiper-slide.fourth .grayscale {
+  background: url('../img/PETALS_1_WEB_16x9.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.swiper-slide.fifth .grayscale {
+  background: url('../img/VESSEL_1_WEB_16x9.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.swiper-slide.last .grayscale {
+  background: url('../img/CREDITS_1_WEB_16x9.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.swiper-slide.first .color {
+  background: url('../img/PRUNING_THE_SPIRIT_2_WEB_16x9.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.swiper-slide.second .color {
+  background: url('../img/ANGEL_CITY_2_WEB_16x9.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.swiper-slide.third .color {
+  background: url('../img/FATA_MORGANA_2_WEB_16x19.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.swiper-slide.fourth .color {
+  background: url('../img/PETALS_2_WEB_16x9.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.swiper-slide.fifth .color {
+  background: url('../img/VESSEL_2_WEB_16x9.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.swiper-slide.last .color {
+  background: url('../img/CREDITS_2_WEB_16x9.jpg') no-repeat 50% 50%;
+  background-size: cover;
 }
 
 .swiper-slide,
@@ -144,14 +213,6 @@ img {
 .player-wrapper {
   background: #fafafa;
 }
-
-.player-container--active {
-  /*opacity: 0;*/
-}
-/*
-.player-container--active:hover {
-  opacity: 1;
-}*/
 
 .bio-link {
   color: #FFF;
@@ -176,16 +237,13 @@ img {
   color: #FFF;
 }
 
-.image-container {
-  height: 100vh;
-  width: 100vw;
-}
-
 .grayscale,
 .color {
   opacity: 0;
   position: absolute;
   transition: opacity 0.3s ease-in;
+  width: 100%;
+  height:100%;
 }
 
 .grayscale.active,
