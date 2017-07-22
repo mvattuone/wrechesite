@@ -135,6 +135,16 @@ img {
   width: 100vw;
 }
 
+.grayscale,
+.color {
+  display: none;
+}
+
+.swiper-slide-active .grayscale,
+.swiper-slide-active .color {
+  display: block;
+}
+
 .swiper-slide.first .grayscale {
   background: url('../img/PRUNING_THE_SPIRIT_1_WEB_16x9.jpg') no-repeat 50% 50%;
   background-size: cover;
