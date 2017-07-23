@@ -85,8 +85,10 @@ $(function(){
               loadTrack(index);
               mySwiper.slideNext();
               audio.play();
+              switchImage('play');
           } else {
               audio.pause();
+              switchImage('pause');
               index = 0;
               mySwiper.slideTo(0);
               loadTrack(index);

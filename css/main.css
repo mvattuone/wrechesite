@@ -137,12 +137,17 @@ img {
 
 .grayscale,
 .color {
+  opacity: 0;
+}
+
+.swiper-slide-next .grayscale,
+.swiper-slide-next .color {
   display: none;
 }
 
-.swiper-slide-active .grayscale,
-.swiper-slide-active .color {
-  display: block;
+.swiper-slide-active .grayscale.active,
+.swiper-slide-active .color.active {
+  opacity: 1;
 }
 
 .swiper-slide.first .grayscale {
